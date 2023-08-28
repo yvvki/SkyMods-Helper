@@ -38,25 +38,33 @@ const appid = document
   ?.split("/")[4];
 const parser = new DOMParser();
 
-var path = ""; // subfolder for collection mods, this only works on firefox, on Chrome it's included in the name
+/**
+ * Subfolder for collection. Only works on firefox, on Chrome it's included in the name
+ */
+var path = "";
 
-var button; // Store the button so that we don't have to call querySelector() all the time
+/**
+ * Global button variable to reduce `querySelector()` calls
+*/
+var button,
+    buttonIcon,
+    buttonText;
 
 // Run this on load and inject the HTML download button
 (function () {
-  button = document.createElement("span"); // global variable
+  // Global variables
+  button = document.createElement("span");
+  buttonIcon = button.appendChild(document.createElement("div"));
+  buttonText = button.appendChild(document.createElement("span"));
 
-  let icon = button.appendChild(document.createElement("div"));
-  let text = button.appendChild(document.createElement("span"));
-
-  text.className = "subscribeText";
-  icon.className = "subscribeIcon";
-  icon.style.backgroundImage = "linear-gradient(#fff, #aaa)";
-  icon.style.maskImage = "url('https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/download/materialsymbolsoutlined/download_wght500grad200_20px.svg')";
-  icon.style.maskRepeat = "no-repeat";
-  icon.style.maskPosition = "center";
-  icon.style.width = "20px";
-  icon.style.left = "5px";
+  buttonText.className = "subscribeText";
+  buttonIcon.className = "subscribeIcon";
+  buttonIcon.style.backgroundImage = "linear-gradient(#fff, #aaa)";
+  buttonIcon.style.maskImage = "url('https://raw.githubusercontent.com/google/material-design-icons/master/symbols/web/download/materialsymbolsoutlined/download_wght500grad200_20px.svg')";
+  buttonIcon.style.maskRepeat = "no-repeat";
+  buttonIcon.style.maskPosition = "center";
+  buttonIcon.style.width = "20px";
+  buttonIcon.style.left = "5px";
 
   var fetchFunction;
 
@@ -65,7 +73,7 @@ var button; // Store the button so that we don't have to call querySelector() al
 
     button.className = "general_btn subscribe";
 
-    text.innerText = "Download all";
+    buttonText.innerText = "Download all";
 
     fetchFunction = fetchCollection;
 
@@ -75,7 +83,7 @@ var button; // Store the button so that we don't have to call querySelector() al
     button.className = "btn_green_white_innerfade btn_border_2px btn_medium ";
     button.style.position = "relative";
 
-    text.innerText = "Download\u2003";
+    buttonText.innerText = "Download\u2003";
 
     fetchFunction = fetchSingle;
   }
