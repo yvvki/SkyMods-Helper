@@ -45,9 +45,12 @@ var path = "";
 
 /**
  * Global button variable to reduce `querySelector()` calls
-*/
+ * @type {HTMLSpanElement}
+ */
 var button,
+/** @type {HTMLDivElement} */
     buttonIcon,
+/** @type {HTMLSpanElement} */
     buttonText;
 
 // Run this on load and inject the HTML download button
