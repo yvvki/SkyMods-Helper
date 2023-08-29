@@ -128,7 +128,7 @@ function fetchSkyModsID(id) {
   let url = getSkyModsURL(id);
   console.debug(`Got link: ${url}`);
 
-  
+  window.open(url, '_blank');
 }
 
 /**
