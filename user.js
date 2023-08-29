@@ -97,12 +97,52 @@ var button,
   parentNode?.insertBefore(button, parentNode?.lastElementChild);
 })();
 
+// Lock fetch
+var isFetching = false;
+var total = 0;
+
 function fetchSingle() {
-  console.debug("Fetching single workshop item");
-  // ...
+  console.trace("Fetching workshop item");
+
+  if (isFetching) return;
+  isFetching = true;
+
+  total = 1;
+
+  buttonText.innerText = "Downloading...";
+
+  let id = new URL(document.URL).searchParams.get("id");
+
+  fetchSkyModsID(id);
 }
 
 function fetchCollection() {
-  console.debug("Fetching workshop item collection");
+  console.trace("Fetching workshop collection");
   // ...
+}
+
+/**
+ * @param {string | null} id
+ */
+function fetchSkyModsID(id) {
+  let url = getSkyModsURL(id);
+  console.debug(`Got link: ${url}`);
+
+  
+}
+
+/**
+ * @param {string | null} id
+ */
+function getSkyModsURL(id) {
+  switch (appid) {
+      case "255710": // Cities: Skylines
+          return `https://smods.ru/?s=${id}`;
+      case "394360": // Hearts of Iron IV
+          return `https://hearts-of-iron-4.smods.ru/?s=${id}`;
+      case "281990": // Stellaris
+          return `https://stellaris.smods.ru/?s=${id}`;
+      default:
+          return `https://catalogue.smods.ru/?s=${id}&app=${appid}`;
+  }
 }
